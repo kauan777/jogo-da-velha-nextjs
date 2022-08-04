@@ -7,7 +7,7 @@ export default function Home() {
   const [turn, setTurn] = useState<Players>("X");
   const [winner, setWinner] = useState<Players | null>(null);
   const [draw, setDraw] = useState<boolean | null>(null);
-
+  const [marks, setMarks] = useState<{ [key: string]: Players }>({});
   /* 
  marks: {
   "0": "X",
@@ -16,8 +16,9 @@ export default function Home() {
  } 
   Valor para armazenar quem jogou em cada posição, sendo a key a posição
 
- */
-  const [marks, setMarks] = useState<{ [key: string]: Players }>({});
+  */
+
+  const gameOver = !!winner || !!draw;
 
 
   useEffect(() => {
@@ -26,6 +27,10 @@ export default function Home() {
 
     if(winner){
       setWinner(winner)
+    } else{ 
+      if(Object.keys(marks).length === 9){
+        setDraw(true)
+      }
     }
 
   }, [marks])
@@ -74,13 +79,20 @@ export default function Home() {
     }
   }
 
+  const reset = () => {
+    setMarks({})
+    setWinner(null)
+    setDraw(null)
+  }
+
     // Quando eu utilizo _ nos parametros de um método array, significa que eu quero ignorar o valor daquele elemento
 
     return (
       <div className={styles.container}>
          
         {winner && <h1>Parabéns {winner}, você ganhou</h1> }
-        <p>É a vez de {turn}</p>
+        {draw && <h1>Empate</h1> }
+        {!gameOver && <p>É a vez de {turn}</p>}
         <div className={styles.board}>
           {getSquares().map((_, index) => (
             <div
@@ -93,7 +105,7 @@ export default function Home() {
           ))}
         </div>
         <div className={styles.button}>
-          <button>Jogar novamente</button>
+          {gameOver && <button onClick={reset}>Jogar novamente</button>}
         </div>
       </div>
     );
