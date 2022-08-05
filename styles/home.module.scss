@@ -49,6 +49,32 @@
 
 }
 
-.teste{
-    background-color: red;
+.gameOver{
+    opacity: 0.5;
+}
+
+.turn{
+    font-size: 20px;
+    margin: 12px;
+    color: #5c5c5c;
+}
+
+.draw{
+    margin-bottom: 1rem;
+}
+
+.playAgain{
+    width: 180px;
+    
+    margin-top: 1rem;
+    padding: 12px 0px 12px 0px;
+    
+    border: none;
+    border-radius: .25rem;
+    
+    color: #fff;
+    font-weight: bold;
+    background: #272727;
+    
+    cursor: pointer;
 }

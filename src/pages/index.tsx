@@ -41,7 +41,8 @@ export default function Home() {
   };
 
   const play = (index: number) => {
-    if (marks[index]) {
+
+    if (marks[index] || gameOver) {
       return;
     }
     setMarks((prev) => ({ ...prev, [index]: turn }));
@@ -80,6 +81,7 @@ export default function Home() {
   }
 
   const reset = () => {
+    setTurn(marks[0] == "X" ? "O" : "X")
     setMarks({})
     setWinner(null)
     setDraw(null)
@@ -91,9 +93,9 @@ export default function Home() {
       <div className={styles.container}>
          
         {winner && <h1>Parabéns {winner}, você ganhou</h1> }
-        {draw && <h1>Empate</h1> }
-        {!gameOver && <p>É a vez de {turn}</p>}
-        <div className={styles.board}>
+        {draw && <h1 className={styles.draw}>Empate</h1> }
+        {!gameOver && <p className={styles.turn}>É a vez de {turn}</p>}
+        <div className={`${styles.board} ${gameOver && styles.gameOver}`}>
           {getSquares().map((_, index) => (
             <div
               key={index}
@@ -105,7 +107,13 @@ export default function Home() {
           ))}
         </div>
         <div className={styles.button}>
-          {gameOver && <button onClick={reset}>Jogar novamente</button>}
+          {gameOver &&( 
+                <button 
+                  className={styles.playAgain} 
+                  onClick={reset}
+                   >
+                    Jogar novamente
+                </button>)}
         </div>
       </div>
     );
