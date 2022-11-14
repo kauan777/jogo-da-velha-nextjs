@@ -1,42 +1,32 @@
 import { GetServerSideProps } from "next";
+import Board from "../components/Board";
 import { parseCookies } from "nookies";
-import styles from "../../styles/home.module.scss";
 import { api } from "../lib/axios";
 import {
   useAuthentication,
   UserProps,
 } from "../contexts/AuthenticationContext";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import NavBar from "../components/NavBar";
 
 type PageProps = {
   data: UserProps;
 };
 
-export default function Home({ data }: PageProps) {
+export default function Game({ data }: PageProps) {
   const player = useAuthentication((state) => state.user);
   const setUser = useAuthentication((state) => state.setUser);
-
-  const [rivalNickname, setRivalNickname] = useState<string>("");
 
   useEffect(() => {
     console.log(data);
     setUser(data);
   }, []);
 
-  const createChannel = async () => {};
-
   return (
     <>
       <NavBar />
-      <main className={styles.container}>
-        <h3>Entre na mesma hora que seu rival</h3>
-        <input
-          placeholder="Digite o nickname do seu rival"
-          value={rivalNickname}
-          onChange={(e) => setRivalNickname(e.target.value)}
-        />
-        <button onClick={createChannel}>COMEÇAR</button>
+      <main className="container">
+        <Board />
       </main>
     </>
   );

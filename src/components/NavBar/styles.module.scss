@@ -1,0 +1,44 @@
+.header {
+  background: linear-gradient(124.64deg, #4da6f8 -1.69%, #21517d 98.58%);
+
+  position: fixed;
+  width: 100%;
+  padding: 1rem 4rem;
+  color: #fff;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .infoPlayer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      .img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        font-size: 24px;
+        padding: 1.2rem;
+        background-color: #fff;
+        color: #4da6f8;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  button {
+    display: flex;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    transition: .2s all;
+  }
+}
